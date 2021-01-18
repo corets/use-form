@@ -1,5 +1,5 @@
 import { UseForm } from "./types"
-import isFunction from "lodash/isFunction"
+import { isFunction } from "lodash-es"
 import { useMemo } from "react"
 import { useValue } from "@corets/use-value"
 import { useStore } from "@corets/use-store"

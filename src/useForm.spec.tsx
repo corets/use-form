@@ -11,7 +11,7 @@ describe("useForm", () => {
     const Test = () => {
       const form = useForm(initializer)
 
-      return <h1>{form.values.get().foo}</h1>
+      return <h1>{form.getAt("foo")}</h1>
     }
 
     const wrapper = mount(<Test />)
@@ -26,7 +26,7 @@ describe("useForm", () => {
     const Test = () => {
       const form = useForm(initializer)
 
-      return <h1>{form.values.get().foo}</h1>
+      return <h1>{form.getAt("foo")}</h1>
     }
 
     const wrapper = mount(<Test />)
@@ -35,9 +35,10 @@ describe("useForm", () => {
     expect(target().text()).toBe("bar")
   })
 
-  it("hooks all form state", () => {
+  it("hooks all form state", async () => {
     const form = createForm({ foo: "bar" }).configure({
       validateOnChange: false,
+      debounceChanges: 0,
     })
     let changes = 0
 
@@ -47,14 +48,14 @@ describe("useForm", () => {
 
       return (
         <h1>
-          {JSON.stringify(form.values.get())},
-          {form.errors.get() === undefined
+          {JSON.stringify(form.get())},
+          {form.getErrors() === undefined
             ? "undefined"
-            : JSON.stringify(form.errors.get())}
-          ,{JSON.stringify(form.submitting.get())},
-          {JSON.stringify(form.submitted.get())},
-          {JSON.stringify(form.dirtyFields.get())},
-          {JSON.stringify(form.changedFields.get())}
+            : JSON.stringify(form.getErrors())}
+          ,{JSON.stringify(form.isSubmitting())},
+          {JSON.stringify(form.isSubmitted())},
+          {JSON.stringify(form.getDirtyFields())},
+          {JSON.stringify(form.getChangedFields())}
         </h1>
       )
     }
@@ -65,7 +66,7 @@ describe("useForm", () => {
     expect(changes).toBe(1)
     expect(target().text()).toBe(`{"foo":"bar"},undefined,false,false,[],[]`)
 
-    act(() => form.errors.set({ field: ["error"] }))
+    act(() => form.setErrors({ field: ["error"] }))
 
     expect(changes).toBe(2)
     expect(target().text()).toBe(
@@ -86,21 +87,21 @@ describe("useForm", () => {
       `{"foo":"bar"},{"field":["error"]},true,true,[],[]`
     )
 
-    act(() => form.dirtyFields.add("field1"))
+    act(() => form.addDirtyFields("field1"))
 
     expect(changes).toBe(5)
     expect(target().text()).toBe(
       `{"foo":"bar"},{"field":["error"]},true,true,["field1"],[]`
     )
 
-    act(() => form.changedFields.add("field2"))
+    act(() => form.addChangedFields("field2"))
 
     expect(changes).toBe(6)
     expect(target().text()).toBe(
       `{"foo":"bar"},{"field":["error"]},true,true,["field1"],["field2"]`
     )
 
-    act(() => form.values.setAt("foo", "yolo"))
+    act(() => form.setAt("foo", "yolo"))
 
     expect(changes).toBe(7)
     expect(target().text()).toBe(

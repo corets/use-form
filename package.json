@@ -33,7 +33,7 @@
     "react-dom": "^16.13.0"
   },
   "dependencies": {
-    "@corets/form": "^0.0.1-6",
+    "@corets/form": "^0.0.1-8",
     "@corets/use-store": "^0.0.1-2",
     "@corets/use-value": "^0.0.1-1"
   },

@@ -36,7 +36,7 @@ describe("useForm", () => {
   })
 
   it("hooks all form state", async () => {
-    const form = createForm({ foo: "bar" }).configure({
+    const form = createForm({ foo: "bar" }).config({
       validateOnChange: false,
       debounceChanges: 0,
     })

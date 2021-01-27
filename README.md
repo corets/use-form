@@ -1,3 +1,5 @@
-<p align="center"><a href="https://corets.github.io/corets"><img src="https://raw.githubusercontent.com/corets/corets/master/public/assets/logo-text.svg" width="300"/></a></p>
+<p align="center"><a href="https://corets.github.io"><img src="https://corets.github.io/public/logo-github-readme.svg" width="300"/></a></p>
 
-<p align="center"><b><a href="https://corets.github.io/corets/use-form">Documentation</a></b></p>
+<p align="center"><b><a href="https://corets.github.io/use-form">Documentation</a></b><br/><br/><br/></p>
+
+<p align="center">React hooks for the @corets/form package</p>

@@ -37,8 +37,8 @@ describe("useForm", () => {
 
   it("hooks all form state", async () => {
     const form = createForm({ foo: "bar" }).config({
-      validateOnChange: false,
-      debounceChanges: 0,
+      reactive: false,
+      debounce: 0,
     })
     let changes = 0
 
@@ -73,14 +73,14 @@ describe("useForm", () => {
       `{"foo":"bar"},{"field":["error"]},false,false,[],[]`
     )
 
-    act(() => form.submitting.set(true))
+    act(() => form.setSubmitting(true))
 
     expect(changes).toBe(3)
     expect(target().text()).toBe(
       `{"foo":"bar"},{"field":["error"]},true,false,[],[]`
     )
 
-    act(() => form.submitted.set(true))
+    act(() => form.setSubmitted(true))
 
     expect(changes).toBe(4)
     expect(target().text()).toBe(

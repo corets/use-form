@@ -10,7 +10,7 @@ export const useForm: UseForm = (initialValue) => {
   const [reference, setReference] = useState(0)
 
   useEffect(() => {
-    return form.listen(() => setReference((previous) => previous + 1), false)
+    return form.listen(() => setReference((previous) => previous + 1))
   }, [])
 
   return form

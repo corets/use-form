@@ -54,8 +54,8 @@ describe("useForm", () => {
             : JSON.stringify(form.getErrors())}
           ,{JSON.stringify(form.isSubmitting())},
           {JSON.stringify(form.isSubmitted())},
-          {JSON.stringify(form.getDirtyFields())},
-          {JSON.stringify(form.getChangedFields())}
+          {JSON.stringify(form.getDirty())},
+          {JSON.stringify(form.getChanged())}
         </h1>
       )
     }
@@ -87,14 +87,14 @@ describe("useForm", () => {
       `{"foo":"bar"},{"field":["error"]},true,true,[],[]`
     )
 
-    act(() => form.addDirtyFields("field1"))
+    act(() => form.addDirtyAt("field1"))
 
     expect(changes).toBe(5)
     expect(target().text()).toBe(
       `{"foo":"bar"},{"field":["error"]},true,true,["field1"],[]`
     )
 
-    act(() => form.addChangedFields("field2"))
+    act(() => form.addChangedAt("field2"))
 
     expect(changes).toBe(6)
     expect(target().text()).toBe(

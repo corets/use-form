@@ -32,11 +32,11 @@
     "devrelease": "np prerelease --no-release-draft --tag dev"
   },
   "peerDependencies": {
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0"
+    "react": "^16.0.0 || ^17.0.0",
+    "react-dom": "^16.0.0 || ^17.0.0"
   },
   "dependencies": {
-    "@corets/form": "^0.0.1-15"
+    "@corets/form": "^0.0.1-21"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.5",

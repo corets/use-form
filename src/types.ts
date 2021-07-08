@@ -5,5 +5,6 @@ export type FormInitializer<TValue extends object, TResult> =
   | ObservableForm<TValue, TResult>
 
 export type UseForm = <TValue extends object = any, TResult = any>(
-  initialValue: FormInitializer<TValue, TResult>
+  initialValue: FormInitializer<TValue, TResult>,
+  deps?: any[]
 ) => ObservableForm<TValue, TResult>

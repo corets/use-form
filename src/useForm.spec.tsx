@@ -1,8 +1,7 @@
 import React from "react"
 import { useForm } from "./index"
-import { mount } from "enzyme"
 import { createForm } from "@corets/form"
-import { act } from "react-dom/test-utils"
+import { act, render, screen } from "@testing-library/react"
 
 describe("useForm", () => {
   it("uses form", () => {
@@ -14,10 +13,11 @@ describe("useForm", () => {
       return <h1>{form.getAt("foo")}</h1>
     }
 
-    const wrapper = mount(<Test />)
-    const target = () => wrapper.find("h1")
+    render(<Test/>)
 
-    expect(target().text()).toBe("bar")
+    const target = screen.getByRole("heading")
+
+    expect(target).toHaveTextContent("bar")
   })
 
   it("uses form with initializer", () => {
@@ -29,10 +29,11 @@ describe("useForm", () => {
       return <h1>{form.getAt("foo")}</h1>
     }
 
-    const wrapper = mount(<Test />)
-    const target = () => wrapper.find("h1")
+    render(<Test/>)
 
-    expect(target().text()).toBe("bar")
+    const target = screen.getByRole("heading")
+
+    expect(target).toHaveTextContent("bar")
   })
 
   it("hooks all form state", async () => {
@@ -60,51 +61,52 @@ describe("useForm", () => {
       )
     }
 
-    const wrapper = mount(<Test />)
-    const target = () => wrapper.find("h1")
+    render(<Test/>)
+
+    const target = screen.getByRole("heading")
 
     expect(changes).toBe(1)
-    expect(target().text()).toBe(`{"foo":"bar"},undefined,false,false,[],[]`)
+    expect(target).toHaveTextContent(`{"foo":"bar"},undefined,false,false,[],[]`)
 
     act(() => form.setErrors({ field: ["error"] }))
 
     expect(changes).toBe(2)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},false,false,[],[]`
     )
 
     act(() => form.setSubmitting(true))
 
     expect(changes).toBe(3)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},true,false,[],[]`
     )
 
     act(() => form.setSubmitted(true))
 
     expect(changes).toBe(4)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},true,true,[],[]`
     )
 
     act(() => form.addDirtyAt("field1"))
 
     expect(changes).toBe(5)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},true,true,["field1"],[]`
     )
 
     act(() => form.addChangedAt("field2"))
 
     expect(changes).toBe(6)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},true,true,["field1"],["field2"]`
     )
 
     act(() => form.setAt("foo", "yolo"))
 
     expect(changes).toBe(7)
-    expect(target().text()).toBe(
+    expect(target).toHaveTextContent(
       `{"foo":"yolo"},{"field":["error"]},true,true,["field1","foo"],["field2","foo"]`
     )
   })

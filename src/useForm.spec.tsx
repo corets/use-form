@@ -75,14 +75,14 @@ describe("useForm", () => {
       `{"foo":"bar"},{"field":["error"]},false,false,[],[]`
     )
 
-    act(() => form.setSubmitting(true))
+    act(() => form.setIsSubmitting(true))
 
     expect(changes).toBe(3)
     expect(target).toHaveTextContent(
       `{"foo":"bar"},{"field":["error"]},true,false,[],[]`
     )
 
-    act(() => form.setSubmitted(true))
+    act(() => form.setIsSubmitted(true))
 
     expect(changes).toBe(4)
     expect(target).toHaveTextContent(

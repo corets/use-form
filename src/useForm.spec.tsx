@@ -37,7 +37,7 @@ describe("useForm", () => {
   })
 
   it("hooks all form state", async () => {
-    const form = createForm({ foo: "bar" }).config({
+    const form = createForm({ foo: "bar" }).configure({
       reactive: false,
       debounce: 0,
     })

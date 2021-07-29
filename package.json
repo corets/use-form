@@ -21,7 +21,7 @@
     "/dist"
   ],
   "repository": "github:corets/use-form",
-  "homepage": "https://corets.github.io/use-form",
+  "homepage": "https://docs.corets.io/hooks/use-form",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"

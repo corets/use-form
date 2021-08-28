@@ -13,5 +13,5 @@ export const useForm: UseForm = (initialValue, deps = []) => {
     return form.listen(() => setReference((previous) => previous + 1))
   }, deps)
 
-  return form
+  return [form, form.fields()]
 }

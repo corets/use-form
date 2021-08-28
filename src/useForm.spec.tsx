@@ -8,23 +8,28 @@ describe("useForm", () => {
     const initializer = createForm({ foo: "bar" })
 
     const Test = () => {
-      const form = useForm(initializer)
+      const [form, fields] = useForm(initializer)
 
-      return <h1>{form.getAt("foo")}</h1>
+      return <>
+        <div data-testid="form">{form.getAt("foo")}</div>
+        <div data-testid="field">{fields.foo.get().getValue()}</div>
+      </>
     }
 
     render(<Test/>)
 
-    const target = screen.getByRole("heading")
+    const target1 = screen.getByTestId("form")
+    const target2 = screen.getByTestId("field")
 
-    expect(target).toHaveTextContent("bar")
+    expect(target1).toHaveTextContent("bar")
+    expect(target2).toHaveTextContent("bar")
   })
 
   it("uses form with initializer", () => {
     const initializer = () => createForm({ foo: "bar" })
 
     const Test = () => {
-      const form = useForm(initializer)
+      const [form] = useForm(initializer)
 
       return <h1>{form.getAt("foo")}</h1>
     }

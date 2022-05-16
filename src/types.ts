@@ -1,5 +1,4 @@
-import { ObjectAccessor } from "@corets/accessor"
-import { ObservableForm, ObservableFormField } from "@corets/form"
+import { ObservableForm } from "@corets/form"
 
 export type FormInitializer<TValue extends object, TResult> =
   | (() => ObservableForm<TValue, TResult>)
@@ -8,4 +7,4 @@ export type FormInitializer<TValue extends object, TResult> =
 export type UseForm = <TValue extends object = any, TResult = any>(
   initialValue: FormInitializer<TValue, TResult>,
   deps?: any[]
-) => [ObservableForm<TValue, TResult>, ObjectAccessor<TValue, ObservableFormField>]
+) => ObservableForm<TValue, TResult>

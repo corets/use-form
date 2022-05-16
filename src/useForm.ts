@@ -7,11 +7,11 @@ export const useForm: UseForm = (initialValue, deps = []) => {
     deps
   )
 
-  const [reference, setReference] = useState(0)
+  const [, setReference] = useState(0)
 
   useEffect(() => {
     return form.listen(() => setReference((previous) => previous + 1))
   }, deps)
 
-  return [form, form.fields()]
+  return form
 }

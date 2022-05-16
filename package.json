@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@corets/accessor": "^0.2.2",
-    "@corets/form": "^0.6.0"
+    "@corets/form": "^0.8.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",

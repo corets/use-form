@@ -8,15 +8,17 @@ describe("useForm", () => {
     const initializer = createForm({ foo: "bar" })
 
     const Test = () => {
-      const [form, fields] = useForm(initializer)
+      const form = useForm(initializer)
 
-      return <>
-        <div data-testid="form">{form.getAt("foo")}</div>
-        <div data-testid="field">{fields.foo.get().getValue()}</div>
-      </>
+      return (
+        <>
+          <div data-testid="form">{form.getAt("foo")}</div>
+          <div data-testid="field">{form.getFields().foo.get().getValue()}</div>
+        </>
+      )
     }
 
-    render(<Test/>)
+    render(<Test />)
 
     const target1 = screen.getByTestId("form")
     const target2 = screen.getByTestId("field")
@@ -29,12 +31,12 @@ describe("useForm", () => {
     const initializer = () => createForm({ foo: "bar" })
 
     const Test = () => {
-      const [form] = useForm(initializer)
+      const form = useForm(initializer)
 
       return <h1>{form.getAt("foo")}</h1>
     }
 
-    render(<Test/>)
+    render(<Test />)
 
     const target = screen.getByRole("heading")
 
@@ -59,19 +61,20 @@ describe("useForm", () => {
             ? "undefined"
             : JSON.stringify(form.getErrors())}
           ,{JSON.stringify(form.isSubmitting())},
-          {JSON.stringify(form.isSubmitted())},
-          {JSON.stringify(form.getDirty())},
-          {JSON.stringify(form.getChanged())}
+          {JSON.stringify(form.isSubmitted())},{JSON.stringify(form.getDirty())}
+          ,{JSON.stringify(form.getChanged())}
         </h1>
       )
     }
 
-    render(<Test/>)
+    render(<Test />)
 
     const target = screen.getByRole("heading")
 
     expect(changes).toBe(1)
-    expect(target).toHaveTextContent(`{"foo":"bar"},undefined,false,false,[],[]`)
+    expect(target).toHaveTextContent(
+      `{"foo":"bar"},undefined,false,false,[],[]`
+    )
 
     act(() => form.setErrors({ field: ["error"] }))
 

@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@corets/accessor": "^0.2.2",
-    "@corets/form": "^0.8.0"
+    "@corets/form": "^0.9.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -51,7 +51,7 @@
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "jest": "^27.0.6",
-    "np": "^7.2.0",
+    "np": "^7.6.3",
     "prettier": "2.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
